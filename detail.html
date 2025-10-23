@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <app-layout>
+    <section class="max-w-screen-lg mx-auto px-4 py-12">
+      <div id="detail-container"></div>
+    </section>
+    </app-layout>
+  
+    <script src="components/layout.html" type="module"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+    
+      const produk = {
+        1: {
+          name: 'Apple iMac 24" M1',
+          price: '$1,249.99',
+          desc: 'All-in-one desktop powerful dan elegan dengan chip M1 dan layar 4.5K Retina.',
+          img: 'https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg',
+        },
+        2: {
+          name: 'MacBook Air M2',
+          price: '$999.00',
+          desc: 'Laptop ultra ringan dengan chip M2 dan performa tinggi.',
+          img: 'https://flowbite.s3.amazonaws.com/blocks/e-commerce/macbook.svg',
+        }
+      };
+    
+      const p = produk[id];
+      if (p) {
+        document.getElementById('detail-container').innerHTML = `
+          <div class="grid md:grid-cols-2 gap-8">
+            <img src="${p.img}" class="w-full rounded-lg shadow" />
+            <div>
+              <h1 class="text-3xl font-bold mb-2 text-gray-900 dark:text-white">${p.name}</h1>
+              <p class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">${p.price}</p>
+              <p class="text-gray-500 dark:text-gray-400 mb-6">${p.desc}</p>
+              <a href="index.html" class="text-primary-700 hover:underline">← Kembali ke Beranda</a>
+            </div>
+          </div>
+        `;
+      } else {
+        document.getElementById('detail-container').innerHTML = `
+          <p class="text-gray-500">Produk tidak ditemukan.</p>
+        `;
+      }
+    </script>
+    
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+</html>
